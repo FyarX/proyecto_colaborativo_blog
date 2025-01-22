@@ -1,5 +1,6 @@
 <?php
 
+
 // 1. Iniciamos sesión
 session_start();
 
