@@ -41,19 +41,23 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
             <h2>Últimas entradas</h2>
             <article>
                 <h3>Título de mi entrada</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat est sit amet sapien sodales, ac lacinia est vehicula. Sed luctus sit amet mi vitae lobortis.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat est sit amet sapien
+                    sodales, ac lacinia est vehicula. Sed luctus sit amet mi vitae lobortis.</p>
             </article>
             <article>
                 <h3>Título de mi entrada</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat est sit amet sapien sodales, ac lacinia est vehicula. Sed luctus sit amet mi vitae lobortis.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat est sit amet sapien
+                    sodales, ac lacinia est vehicula. Sed luctus sit amet mi vitae lobortis.</p>
             </article>
             <article>
                 <h3>Título de mi entrada</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat est sit amet sapien sodales, ac lacinia est vehicula. Sed luctus sit amet mi vitae lobortis.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat est sit amet sapien
+                    sodales, ac lacinia est vehicula. Sed luctus sit amet mi vitae lobortis.</p>
             </article>
             <article>
                 <h3>Título de mi entrada</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat est sit amet sapien sodales, ac lacinia est vehicula. Sed luctus sit amet mi vitae lobortis.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat est sit amet sapien
+                    sodales, ac lacinia est vehicula. Sed luctus sit amet mi vitae lobortis.</p>
             </article>
             <button>Ver todas las entradas</button>
         </section>
@@ -94,10 +98,11 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                 </div>
 
                 <div>
-                    <form method="POST" action="crearEntrada.php">
-                    <input type="text" name="tituloEntrada" placeholder="Título de la entrada">
-                    <button type="submit" name="botonCrearEntrada">Crear entrada</button>
-                    </form>
+                    <h3>Crear Categoria</h3>
+                    <form method="POST" action="crearCategoria.php">
+                        <input type="text" name="tituloCategoria" required>
+                        <button type="submit" name="botonCrearEntrada">Crear Categoria</button>
+                        </form>
                 </div>
             <?php } ?>
 
