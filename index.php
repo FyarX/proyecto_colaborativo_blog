@@ -92,6 +92,13 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                         <button type="submit" name="botonCerrarSesion">Cerrar Sesión</button>
                     </form>
                 </div>
+
+                <div>
+                    <form method="POST" action="crearEntrada.php">
+                    <input type="text" name="tituloEntrada" placeholder="Título de la entrada">
+                    <button type="submit" name="botonCrearEntrada">Crear entrada</button>
+                    </form>
+                </div>
             <?php } ?>
 
         </aside>
