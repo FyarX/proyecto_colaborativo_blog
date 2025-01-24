@@ -1,6 +1,6 @@
 <?php
 // Configuración de la conexión con PDO
-    $dsn = "mysql:host=locahost;dbname=blog;charset=utf8mb4";
+    $dsn = "mysql:host=localhost;dbname=blogcolaborativo;charset=utf8mb4";
     //19216810227
     $username = "root";
     $password = "";
