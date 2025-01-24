@@ -7,6 +7,11 @@ require_once 'requires/conexion.php';
 
 $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
 
+
+echo "Esta es la rama de juan, profe";
+
+echo "Esta es la rama de AdriánAlumno";
+
 ?>
 
 <!DOCTYPE html>
@@ -88,12 +93,6 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                     <form method="POST" action="logout.php">
                         <button type="submit" name="botonCerrarSesion">Cerrar Sesión</button>
                     </form>
-
-                    <form action="<?php 'acciones/aniade_buscador' ?>" method="GET" style="display: inline;">
-                            <label for="query">Buscar:</label>
-                            <input type="text" id="query" name="query" placeholder="Buscar por título" required>
-                            <button type="submit">Buscar</button>
-                    </form>             
                 </div>
             <?php } ?>
 
