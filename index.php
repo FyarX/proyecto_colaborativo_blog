@@ -1,9 +1,12 @@
 <?php
 
-// 1. Iniciamos sesión
+// Inicio de sesión
 session_start();
 
+
+// Llamada a los otros ficheros
 require_once 'requires/conexion.php';
+require_once 'listarCategorias.php';
 
 $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
 
@@ -26,6 +29,10 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
         <nav>
             <ul>
                 <li><a href="#">Inicio</a></li>
+                <!-- Llamada a las categorias para que aparezcan como secciones -->
+                <?php forEach($categorias as $categoria) { ?>
+                    <li><a href="#"><?= $categoria['nombre'] ?></a></li>
+                <?php } ?>
                 <li><a href="#">Acción</a></li>
                 <li><a href="#">Rol</a></li>
                 <li><a href="#">Deportes</a></li>
