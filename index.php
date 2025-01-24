@@ -63,11 +63,7 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
             <button>Ver todas las entradas</button>
         </section>
         <aside>
-            <div class="search">
-                <h3>Buscar</h3>
-                <input type="text" placeholder="Buscar...">
-                <button>Buscar</button>
-            </div>
+            
             <?php if (!$_SESSION['loginExito']) { ?>
                 <div class="login">
                     <h3>Identificate</h3>
@@ -95,10 +91,15 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                 <div>
                     <form method="POST" action="logout.php">
                         <button type="submit" name="botonCerrarSesion">Cerrar Sesión</button>
-                        
-
-
                     </form>
+                    <div class="search">
+                    <form action="<?php 'buscar.php' ?>" method="GET" style="display: inline;">
+                        <label for="query">Buscar:</label>
+                        <input type="text" id="query" name="query" placeholder="Buscar por título" required>
+                        <button type="submit">Buscar</button>
+                    </form>
+                    
+            </div>
                 </div>
             <?php } ?>
 
@@ -107,4 +108,3 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
 </body>
 
 </html>
-<?php echo "Esta es la rama de Sara"; ?>
