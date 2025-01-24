@@ -95,6 +95,9 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                 <div>
                     <form method="POST" action="logout.php">
                         <button type="submit" name="botonCerrarSesion">Cerrar Sesión</button>
+                        
+
+
                     </form>
                 </div>
             <?php } ?>
@@ -104,3 +107,4 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
 </body>
 
 </html>
+<?php echo "Esta es la rama de Sara"; ?>
