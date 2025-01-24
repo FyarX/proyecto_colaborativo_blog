@@ -8,10 +8,6 @@ require_once 'requires/conexion.php';
 $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
 
 
-echo "Esta es la rama de juan, profe";
-
-echo "Esta es la rama de AdriánAlumno";
-
 ?>
 
 <!DOCTYPE html>
@@ -60,11 +56,7 @@ echo "Esta es la rama de AdriánAlumno";
             <button>Ver todas las entradas</button>
         </section>
         <aside>
-            <div class="search">
-                <h3>Buscar</h3>
-                <input type="text" placeholder="Buscar...">
-                <button>Buscar</button>
-            </div>
+            
             <?php if (!$_SESSION['loginExito']) { ?>
                 <div class="login">
                     <h3>Identificate</h3>
@@ -93,6 +85,14 @@ echo "Esta es la rama de AdriánAlumno";
                     <form method="POST" action="logout.php">
                         <button type="submit" name="botonCerrarSesion">Cerrar Sesión</button>
                     </form>
+                    <div class="search">
+                    <form action="<?php 'buscar.php' ?>" method="GET" style="display: inline;">
+                        <label for="query">Buscar:</label>
+                        <input type="text" id="query" name="query" placeholder="Buscar por título" required>
+                        <button type="submit">Buscar</button>
+                    </form>
+                    
+            </div>
                 </div>
             <?php } ?>
 
