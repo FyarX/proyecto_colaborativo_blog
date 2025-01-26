@@ -31,19 +31,22 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
             </ul>
         </nav>
     </header>
-    <form action="" method="POST">
+    <form action="envio_mensaje.php" method="POST">
         <fieldset>
             <legend>¿Quieres contactar con nosotros?</legend>
             <label for="nombre">Nombre:</label>
-            <input type="text" placeholder="Introduce tu nombre" name="nombre" id="nombre">
-            <label for="correo">Correo-electronico</label>
-            <input type="text" placeholder="Introduce tu correo" name="correo" id="correo">
+            <input type="text" placeholder="Introduce tu nombre" name="nombre" id="nombre" required>
+            <label for="correo">Correo-electronico:</label>
+            <input type="text" placeholder="Introduce tu correo" name="correo" id="correo" required>
             <label for="asunto">Asunto:</label>
-            <input type="text" placeholder="Introduce el asunto" name="asunto" id="asunto">
+            <input type="text" placeholder="Introduce el asunto" name="asunto" id="asunto" required>
             <label for="mensaje">Mensaje</label>
-            <textarea name="mensaje" id="mensaje" cols="30" rows="10"></textarea>
-            <input type="submit" value="Enviar">
-            <input type="reset" value="borrar">
+            <textarea name="mensaje" id="mensaje" cols="30" rows="10" required></textarea>
+            <div id="boton">
+            <input type="submit" value="Enviar" >
+            <input type="reset" value="Borrar">
+            </div>
+            
         </fieldset>
     </form>    
 </body>
