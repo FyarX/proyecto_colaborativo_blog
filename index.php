@@ -89,18 +89,8 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                 </div>
             <?php } else { ?>
                 <div>
-                    <form action="/crearEntrada.php" method="post">
-                        <button>Crear entrada</button>
-                    </form>
                     <form method="POST" action="logout.php">
                         <button type="submit" name="botonCerrarSesion">Cerrar Sesión</button>
-<<<<<<< HEAD
-                    </form>
-                    
-                    <form method="POST" action="actualizarDatosUsuario.php">
-                    <button type="submit" name="botonActualizarDatos">Actualizar Datos</button>
-=======
->>>>>>> 9cd2a58fd8fac1bd9ca6a8e34de2cc4760678d47
                     </form>
                     <div class="search">
                     <form action="<?php 'buscar.php' ?>" method="GET" style="display: inline;">
