@@ -10,8 +10,8 @@ if (!isset($_SESSION['usuario'])) {
 $usuario_id = $_SESSION['usuario']['id']; // Obtén el ID del usuario logueado
 
 
-require_once '../requires/conexion.php';
-require_once 'conseguirCategorias.php';
+require_once '../blog2/requires/conexion.php';
+require_once 'functions/conseguirCategorias.php';
 
 // Variables iniciales
 $titulo = '';

@@ -2,7 +2,7 @@
 
 session_start();
 
-require_once 'requires/conexion.php';
+require_once '../blog2/requires/conexion.php';
 
 // 7. Definimos una variable de sesión para controlar los 3 intentos fallidos de inicio de sesión
 $_SESSION['errorInicioSesion'] = $_SESSION['errorInicioSesion'] ?? 0;
