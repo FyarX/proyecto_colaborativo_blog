@@ -28,14 +28,13 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
         <h1>Blog de Videojuegos</h1>
         <nav>
             <ul>
-                <li><a href="#">Inicio</a></li>
-                <!-- Llamada a las categorias para que aparezcan como secciones -->
-                <?php forEach($categorias as $categoria) { ?>
-                    <li><a href="#"><?= $categoria['nombre'] ?></a></li>
-                <?php } ?>
-                <li><a href="#">Acción</a></li>
-                <li><a href="#">Rol</a></li>
-                <li><a href="#">Deportes</a></li>
+                <?php if (!empty($categorias)): ?>
+                    <?php foreach ($categorias as $categoria): ?>
+                        <li><a href="entradasCategoria.php?id=<?= $categoria['id'] ?>"><?= htmlspecialchars($categoria['nombre']) ?></a></li>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <li><a href="#">Sin categorías</a></li>
+                <?php endif; ?>
                 <li><a href="#">Responsabilidad</a></li>
                 <li><a href="#">Contacto</a></li>
             </ul>
@@ -63,7 +62,7 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
             <button>Ver todas las entradas</button>
         </section>
         <aside>
-            
+
             <?php if (!$_SESSION['loginExito']) { ?>
                 <div class="login">
                     <h3>Identificate</h3>
@@ -90,20 +89,20 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
             <?php } else { ?>
                 <div>
 
-                <form action="crearEntrada.php" method="post">
+                    <form action="crearEntrada.php" method="post">
                         <button type="submit" name="crearEntrada">Crear entrada</button>
                     </form>
                     <form method="POST" action="logout.php">
                         <button type="submit" name="botonCerrarSesion">Cerrar Sesión</button>
                     </form>
                     <div class="search">
-                    <form action="<?php 'buscar.php' ?>" method="GET" style="display: inline;">
-                        <label for="query">Buscar:</label>
-                        <input type="text" id="query" name="query" placeholder="Buscar por título" required>
-                        <button type="submit">Buscar</button>
-                    </form>
-                    
-            </div>
+                        <form action="aniade_buscador.php" method="GET" style="display: inline;">
+                            <label for="query">Buscar Entradas:</label>
+                            <input type="text" id="query" name="query" placeholder="Buscar por título" required>
+                            <button type="submit">Buscar</button>
+                        </form>
+
+                    </div>
                 </div>
             <?php } ?>
 
