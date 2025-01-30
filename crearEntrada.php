@@ -1,16 +1,17 @@
 <?php
 
 session_start();
+
 if (!isset($_SESSION['usuario'])) {
-    // Redirige al login si no hay sesión activa
-    header('Location: ../login.php');
+    
+    header('Location: login.php');
     exit;
 }
 
-$usuario_id = $_SESSION['usuario']['id']; // Obtén el ID del usuario logueado
+$usuario_id = $_SESSION['usuario']['id'];
 
 
-require_once '../blog2/requires/conexion.php';
+require_once 'requires/conexion.php';
 require_once 'functions/conseguirCategorias.php';
 
 // Variables iniciales

@@ -6,7 +6,7 @@
 require_once 'requires/conexion.php';
 require_once 'functions/conseguirCategorias.php';
 
-$categorias = conseguirCategorias($conexion);
+$categorias = conseguirCategorias($pdo);
 
 
 ?>
