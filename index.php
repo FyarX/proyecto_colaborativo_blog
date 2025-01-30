@@ -6,21 +6,19 @@ session_start();
 require_once 'requires/conexion.php';
 require_once 'listarEntradas.php';
 
-// Inicializar variables de sesión
-$_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
+// Obtener entradas
+$entradas = conseguirUltimasEntradas($pdo);
 
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog de Videojuegos</title>
     <link rel="stylesheet" href="assets/css/estilo.css">
 </head>
-
 <body>
     <header>
         <h1>Blog de Videojuegos</h1>
@@ -35,32 +33,24 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
             </ul>
         </nav>
     </header>
+    
     <main>
         <section class="content">
             <h2>Últimas entradas</h2>
-            <?php
-                $entradas = conseguirUltimasEntradas($pdo);
-                if ($entradas instanceof mysqli_result && mysqli_num_rows($entradas) > 0):
-                    while ($entrada = mysqli_fetch_assoc($entradas)):
-            ?>
+            <?php if (!empty($entradas)): ?>
+                <?php foreach ($entradas as $entrada): ?>
                     <article>
                         <h3><?= htmlspecialchars($entrada['titulo']) ?></h3>
                         <p><?= htmlspecialchars(substr($entrada['descripcion'], 0, 150)) ?>...</p>
                     </article>
-                <?php
-                    endwhile;
-                else:
-                ?>
-                    <p>No hay entradas disponibles.</p>
-                <?php
-                endif;
-                ?>
-                <article>
-                    <h3><?= htmlspecialchars($entrada['titulo']) ?></h3>
-                    <p><?= htmlspecialchars(substr($entrada['descripcion'], 0, 150)) ?>...</p>
-                </article>
-            <button>Ver todas las entradas</button>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>No hay entradas disponibles.</p>
+            <?php endif; ?>
+            
+            <a href="listarEntradas.php"><button>Ver todas las entradas</button></a>
         </section>
+        
         <aside>
             <div class="search">
                 <h3>Buscar</h3>
@@ -69,7 +59,8 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                     <button type="submit">Buscar</button>
                 </form>
             </div>
-            <?php if (!$_SESSION['loginExito']): ?>
+
+            <?php if (!isset($_SESSION['loginExito']) || !$_SESSION['loginExito']): ?>
                 <div class="login">
                     <h3>Identifícate</h3>
                     <?php if (!empty($_SESSION['errorPassLogin'])): ?>
@@ -81,6 +72,7 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                         <button type="submit" name="botonLogin">Entrar</button>
                     </form>
                 </div>
+
                 <div class="register">
                     <h3>Regístrate</h3>
                     <?php if (!empty($_SESSION['success_message'])): ?>
@@ -104,5 +96,4 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
         </aside>
     </main>
 </body>
-
 </html>
