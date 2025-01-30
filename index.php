@@ -1,14 +1,13 @@
 <?php
-
-// 1. Iniciamos sesión
+// Iniciar sesión
 session_start();
 
+// Incluir conexión a la base de datos y funciones necesarias
 require_once 'requires/conexion.php';
+require_once 'listarEntradas.php';
 
+// Inicializar variables de sesión
 $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
-
-
-
 
 ?>
 
@@ -39,64 +38,71 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
     <main>
         <section class="content">
             <h2>Últimas entradas</h2>
-            <article>
-                <h3>Título de mi entrada</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat est sit amet sapien sodales, ac lacinia est vehicula. Sed luctus sit amet mi vitae lobortis.</p>
-            </article>
-            <article>
-                <h3>Título de mi entrada</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat est sit amet sapien sodales, ac lacinia est vehicula. Sed luctus sit amet mi vitae lobortis.</p>
-            </article>
-            <article>
-                <h3>Título de mi entrada</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat est sit amet sapien sodales, ac lacinia est vehicula. Sed luctus sit amet mi vitae lobortis.</p>
-            </article>
-            <article>
-                <h3>Título de mi entrada</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat est sit amet sapien sodales, ac lacinia est vehicula. Sed luctus sit amet mi vitae lobortis.</p>
-            </article>
+            <?php
+                $entradas = conseguirUltimasEntradas($pdo);
+                if ($entradas instanceof mysqli_result && mysqli_num_rows($entradas) > 0):
+                    while ($entrada = mysqli_fetch_assoc($entradas)):
+            ?>
+                    <article>
+                        <h3><?= htmlspecialchars($entrada['titulo']) ?></h3>
+                        <p><?= htmlspecialchars(substr($entrada['descripcion'], 0, 150)) ?>...</p>
+                    </article>
+                <?php
+                    endwhile;
+                else:
+                ?>
+                    <p>No hay entradas disponibles.</p>
+                <?php
+                endif;
+                ?>
+                <article>
+                    <h3><?= htmlspecialchars($entrada['titulo']) ?></h3>
+                    <p><?= htmlspecialchars(substr($entrada['descripcion'], 0, 150)) ?>...</p>
+                </article>
             <button>Ver todas las entradas</button>
         </section>
         <aside>
             <div class="search">
                 <h3>Buscar</h3>
-                <input type="text" placeholder="Buscar...">
-                <button>Buscar</button>
+                <form method="GET" action="buscar.php">
+                    <input type="text" name="busqueda" placeholder="Buscar...">
+                    <button type="submit">Buscar</button>
+                </form>
             </div>
-            <?php if (!$_SESSION['loginExito']) { ?>
+            <?php if (!$_SESSION['loginExito']): ?>
                 <div class="login">
-                    <h3>Identificate</h3>
-                    <?php if (isset($_SESSION['errorPassLogin']))
-                        echo $_SESSION['errorPassLogin']; ?>
+                    <h3>Identifícate</h3>
+                    <?php if (!empty($_SESSION['errorPassLogin'])): ?>
+                        <p class="error"><?= htmlspecialchars($_SESSION['errorPassLogin']) ?></p>
+                    <?php endif; ?>
                     <form method="POST" action="login.php">
-                        <input type="email" name="emailLogin" placeholder="Email">
-                        <input type="password" name="passwordLogin" placeholder="Contraseña">
+                        <input type="email" name="emailLogin" placeholder="Email" required>
+                        <input type="password" name="passwordLogin" placeholder="Contraseña" required>
                         <button type="submit" name="botonLogin">Entrar</button>
                     </form>
                 </div>
                 <div class="register">
-                    <h3>Registrate</h3>
-                    <?php if (isset($_SESSION['success_message']))
-                        echo $_SESSION['success_message']; ?>
+                    <h3>Regístrate</h3>
+                    <?php if (!empty($_SESSION['success_message'])): ?>
+                        <p class="success"><?= htmlspecialchars($_SESSION['success_message']) ?></p>
+                    <?php endif; ?>
                     <form method="POST" action="registro.php">
-                        <input type="text" name="nombreRegistro" placeholder="Nombre">
-                        <input type="text" name="apellidosRegistro" placeholder="Apellidos">
-                        <input type="email" name="emailRegistro" placeholder="Email">
-                        <input type="password" name="passwordRegistro" placeholder="Contraseña">
+                        <input type="text" name="nombreRegistro" placeholder="Nombre" required>
+                        <input type="text" name="apellidosRegistro" placeholder="Apellidos" required>
+                        <input type="email" name="emailRegistro" placeholder="Email" required>
+                        <input type="password" name="passwordRegistro" placeholder="Contraseña" required>
                         <button type="submit" name="botonRegistro">Registrar</button>
                     </form>
                 </div>
-            <?php } else { ?>
-                <div>
+            <?php else: ?>
+                <div class="logout">
                     <form method="POST" action="logout.php">
                         <button type="submit" name="botonCerrarSesion">Cerrar Sesión</button>
                     </form>
                 </div>
-            <?php } ?>
-
+            <?php endif; ?>
         </aside>
     </main>
 </body>
 
 </html>
-<?php echo "Esta es la rama de Sara"; ?>
