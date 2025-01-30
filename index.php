@@ -90,8 +90,8 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
             <?php } else { ?>
                 <div>
 
-                <form action="/crearEntrada.php" method="post">
-                        <button>Crear entrada</button>
+                <form action="crearEntrada.php" method="post">
+                        <button type="submit" name="crearEntrada">Crear entrada</button>
                     </form>
                     <form method="POST" action="logout.php">
                         <button type="submit" name="botonCerrarSesion">Cerrar Sesión</button>
