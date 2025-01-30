@@ -1,16 +1,17 @@
 <?php
 
 session_start();
+
 if (!isset($_SESSION['usuario'])) {
-    // Redirige al login si no hay sesión activa
-    header('Location: ../login.php');
+    
+    header('Location: login.php');
     exit;
 }
 
-$usuario_id = $_SESSION['usuario']['id']; // Obtén el ID del usuario logueado
+$usuario_id = $_SESSION['usuario']['id'];
 
 
-require_once '../blog2/requires/conexion.php';
+require_once 'requires/conexion.php';
 require_once 'functions/conseguirCategorias.php';
 
 // Variables iniciales
@@ -23,7 +24,7 @@ $errores = [];
 if (isset($_GET['id'])) {
     $id_entrada = (int)$_GET['id'];
     $sql = "SELECT * FROM entradas WHERE id = :id_entrada";
-    $stmt = $db->prepare($sql);
+    $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':id_entrada', $id_entrada, PDO::PARAM_INT);
     $stmt->execute();
     $entrada = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -64,13 +65,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $sql = "UPDATE entradas 
                         SET titulo = :titulo, descripcion = :descripcion, categoria_id = :categoria 
                         WHERE id = :id_entrada";
-                $stmt = $db->prepare($sql);
+                $stmt = $pdo->prepare($sql);
                 $stmt->bindParam(':id_entrada', $id_entrada, PDO::PARAM_INT);
             } else {
                 // Insertar nueva entrada
                 $sql = "INSERT INTO entradas (titulo, descripcion, categoria_id, usuario_id, fecha) 
                         VALUES (:titulo, :descripcion, :categoria, :usuario_id, NOW())";
-                $stmt = $db->prepare($sql);
+                $stmt = $pdo->prepare($sql);
                 $stmt->bindParam(':usuario_id', $usuario_id, PDO::PARAM_INT); // Usuario logueado
             }
     
@@ -82,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Redirigir con mensaje de éxito
             echo "<script>
                 //alert('Entrada guardada con éxito.');
-                setTimeout(() => { window.location.href = '../index.php'; }, 2000);
+                setTimeout(() => { window.location.href = 'index.php'; }, 2000);
             </script>";
             exit;
         } catch (PDOException $e) {
@@ -93,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Obtener las categorías disponibles
-$categorias = conseguirCategorias($db);
+$categorias = conseguirCategorias($pdo);
 ?>
 
 <!DOCTYPE html>
@@ -104,7 +105,7 @@ $categorias = conseguirCategorias($db);
     <link rel="stylesheet" href="../assets/css/estilo.css">
 </head>
 <body>
-<?php require_once '../requires/header.php'; ?>
+<?php  ?>
     <div class="container">
         <h1><?= isset($id_entrada) ? 'Editar Entrada' : 'Crear Nueva Entrada' ?></h1>
         <form action="crearEntrada.php<?= isset($id_entrada) ? '?id=' . $id_entrada : '' ?>" method="POST">

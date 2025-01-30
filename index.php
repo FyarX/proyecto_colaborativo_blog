@@ -5,7 +5,7 @@ session_start();
 
 
 // Llamada a los otros ficheros
-require_once 'requires/conexion.php';
+require_once  'requires/conexion.php';
 require_once 'listarCategorias.php';
 
 $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
@@ -67,11 +67,13 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
             <?php if (!$_SESSION['loginExito']) { ?>
                 <div class="login">
                     <h3>Identificate</h3>
-                    <?php if (isset($_SESSION['errorPassLogin']))
-                        echo $_SESSION['errorPassLogin']; ?>
+                        
                     <form method="POST" action="login.php">
                         <input type="email" name="emailLogin" placeholder="Email">
                         <input type="password" name="passwordLogin" placeholder="Contraseña">
+                        <?php if (isset($_SESSION['errorPassLogin'])){?>
+                        <span style="color: red;"><?php echo $_SESSION['errorPassLogin']; ?></span>
+                        <?php } ?> 
                         <button type="submit" name="botonLogin">Entrar</button>
                     </form>
                 </div>
@@ -79,7 +81,7 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                     <h3>Registrate</h3>
                     <?php if (isset($_SESSION['success_message']))
                         echo $_SESSION['success_message']; ?>
-                    <form method="POST" action="registro.php">
+                      <form method="POST" action="registro.php">
                         <input type="text" name="nombreRegistro" placeholder="Nombre">
                         <input type="text" name="apellidosRegistro" placeholder="Apellidos">
                         <input type="email" name="emailRegistro" placeholder="Email">
@@ -91,6 +93,9 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                 <div>
                     <form method="POST" action="logout.php">
                         <button type="submit" name="botonCerrarSesion">Cerrar Sesión</button>
+                    </form>
+                    <form method="POST" action="actualizarDatosUsuario.php">
+                        <button type="submit" name="botonCerrarSesion">Actualizar Datos</button>
                     </form>
                     <div class="search">
                     <form action="<?php 'buscar.php' ?>" method="GET" style="display: inline;">
