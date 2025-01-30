@@ -28,7 +28,6 @@ $entradas = conseguirUltimasEntradas ($pdo);
                         <th>Título</th>
                         <th>Descripción</th>
                         <th>Categoría</th>
-                        <th>Autor</th>
                         <th>Fecha</th>
                     </tr>
                 </thead>
@@ -39,7 +38,6 @@ $entradas = conseguirUltimasEntradas ($pdo);
                             <td><?= htmlspecialchars($entrada['titulo']) ?></td>
                             <td><?= htmlspecialchars(substr($entrada['descripcion'], 0, 100)) ?>...</td>
                             <td><?= htmlspecialchars($entrada['categoria']) ?></td>
-                            <td><?= htmlspecialchars($entrada['autor']) ?></td>
                             <td><?= htmlspecialchars($entrada['fecha']) ?></td>
 
                             <!-- Mostrar opciones de edición y eliminación solo si el usuario es el autor -->

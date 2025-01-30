@@ -69,6 +69,9 @@ $entradas = conseguirUltimasEntradas($pdo);
                     <form method="POST" action="login.php">
                         <input type="email" name="emailLogin" placeholder="Email" required>
                         <input type="password" name="passwordLogin" placeholder="Contraseña" required>
+                        <label>
+                            <input type="checkbox" name="rememberMe"> Recordarme
+                        </label>
                         <button type="submit" name="botonLogin">Entrar</button>
                     </form>
                 </div>

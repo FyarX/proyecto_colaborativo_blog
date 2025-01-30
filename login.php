@@ -26,6 +26,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['botonLogin']) && $_SES
             if (password_verify($password, $user['password'])) {
                 $_SESSION['errorInicioSesion'] = 0;
                 $_SESSION['loginExito'] = true;
+
+                // Si el usuario quiere ser recordado, establecemos una cookie
+                if (isset($_POST['rememberMe']) && $_POST['rememberMe'] == 'on') {
+                    // Aquí usamos un ejemplo simple, pero es recomendable usar un token de seguridad para la cookie.
+                    setcookie('email', $email, time() + 3600 * 24 * 30, "/"); // 30 días
+                    setcookie('password', base64_encode($password), time() + 3600 * 24 * 30, "/");
+                }
+                
             } else {
                 $_SESSION['errorPassLogin'] = "La contraseña no es correcta.";
                 $_SESSION['errorInicioSesion']++;
