@@ -4,6 +4,24 @@ session_start();
 
 require_once 'requires/conexion.php';
 
+// Verificar si las cookies existen
+if (isset($_COOKIE['email']) && isset($_COOKIE['password'])) {
+    $email = $_COOKIE['email'];
+    $password = base64_decode($_COOKIE['password']);
+    
+    $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE email = :email");
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+    
+    if ($stmt->rowCount() == 1) {
+        $user = $stmt->fetch();
+        if (password_verify($password, $user['password'])) {
+            $_SESSION['loginExito'] = true;
+            $_SESSION['errorInicioSesion'] = 0;
+        }
+    }
+}
+
 // 7. Definimos una variable de sesión para controlar los 3 intentos fallidos de inicio de sesión
 $_SESSION['errorInicioSesion'] = $_SESSION['errorInicioSesion'] ?? 0;
 $_SESSION['ultimoIntento'] = $_SESSION['ultimoIntento'] ?? time();
@@ -33,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['botonLogin']) && $_SES
                     setcookie('email', $email, time() + 3600 * 24 * 30, "/"); // 30 días
                     setcookie('password', base64_encode($password), time() + 3600 * 24 * 30, "/");
                 }
-                
+
             } else {
                 $_SESSION['errorPassLogin'] = "La contraseña no es correcta.";
                 $_SESSION['errorInicioSesion']++;
