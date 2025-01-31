@@ -104,7 +104,17 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                         <button type="submit" name="botonCrearEntrada">Crear Categoria</button>
                         </form>
                 </div>
-            <?php } ?>
+
+                <div>
+                    <h3>Consultar entrada</h3>
+                    <form method="POST" action="verEntrada.php">
+                        <input type="text" name="tituloEntrada" >
+                        <button type="submit" name="botonVerEntrada">Ver entrada</button>
+                        </form>
+                </div>
+            <?php } 
+            
+            ?>
 
         </aside>
     </main>
