@@ -90,7 +90,11 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                 </div>
             <?php } else { ?>
                 <div>
-
+                    <form action="crearCategoria.php" method="POST">
+                        <label for="tituloCategoria">Introduce tu categoria</label>
+                        <input type="text" name="tituloCategoria" id="tituloCategoria">
+                        <input type="submit" name="botonCrearEntrada" value="Crear Categoria">
+                    </form>
                     <form action="crearEntrada.php" method="post">
                         <button type="submit" name="crearEntrada">Crear entrada</button>
                     </form>
