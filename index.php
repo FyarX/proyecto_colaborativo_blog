@@ -7,6 +7,10 @@ session_start();
 // Llamada a los otros ficheros
 require_once  'requires/conexion.php';
 require_once 'listarCategorias.php';
+require_once 'listarEntradas.php';
+
+// Obtener entradas
+$entradas = conseguirUltimasEntradas($pdo);
 
 $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
 
@@ -43,36 +47,33 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
     <main>
         <section class="content">
             <h2>Últimas entradas</h2>
-            <article>
-                <h3>Título de mi entrada</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat est sit amet sapien sodales, ac lacinia est vehicula. Sed luctus sit amet mi vitae lobortis.</p>
-            </article>
-            <article>
-                <h3>Título de mi entrada</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat est sit amet sapien sodales, ac lacinia est vehicula. Sed luctus sit amet mi vitae lobortis.</p>
-            </article>
-            <article>
-                <h3>Título de mi entrada</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat est sit amet sapien sodales, ac lacinia est vehicula. Sed luctus sit amet mi vitae lobortis.</p>
-            </article>
-            <article>
-                <h3>Título de mi entrada</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat est sit amet sapien sodales, ac lacinia est vehicula. Sed luctus sit amet mi vitae lobortis.</p>
-            </article>
-            <button>Ver todas las entradas</button>
+            <?php if (!empty($entradas)): ?>
+                <?php foreach ($entradas as $entrada): ?>
+                    <article>
+                        <h3><?= htmlspecialchars($entrada['titulo']) ?></h3>
+                        <p><?= htmlspecialchars(substr($entrada['descripcion'], 0, 150)) ?>...</p>
+                    </article>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>No hay entradas disponibles.</p>
+            <?php endif; ?>
+            
+            <a href="listarEntradas.php"><button>Ver todas las entradas</button></a>
         </section>
         <aside>
 
-            <?php if (!$_SESSION['loginExito']) { ?>
+            <?php if (!isset($_SESSION['loginExito']) || !$_SESSION['loginExito']): ?>
                 <div class="login">
-                    <h3>Identificate</h3>
-                        
+                    <h3>Identifícate</h3>
+                    <?php if (!empty($_SESSION['errorPassLogin'])): ?>
+                        <p class="error"><?= htmlspecialchars($_SESSION['errorPassLogin']) ?></p>
+                    <?php endif; ?>
                     <form method="POST" action="login.php">
-                        <input type="email" name="emailLogin" placeholder="Email">
-                        <input type="password" name="passwordLogin" placeholder="Contraseña">
-                        <?php if (isset($_SESSION['errorPassLogin'])){?>
-                        <span style="color: red;"><?php echo $_SESSION['errorPassLogin']; ?></span>
-                        <?php } ?> 
+                        <input type="email" name="emailLogin" placeholder="Email" required>
+                        <input type="password" name="passwordLogin" placeholder="Contraseña" required>
+                        <label>
+                            <input type="checkbox" name="rememberMe"> Recordarme
+                        </label>
                         <button type="submit" name="botonLogin">Entrar</button>
                     </form>
                 </div>
