@@ -36,7 +36,7 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                     <li><a href="#">Sin categorías</a></li>
                 <?php endif; ?>
                 <li><a href="#">Responsabilidad</a></li>
-                <li><a href="./contacto.php">Contacto</a></li>
+                <li><a href="contacto.php">Contacto</a></li>
             </ul>
         </nav>
     </header>
@@ -106,6 +106,18 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                             <input type="text" id="query" name="query" placeholder="Buscar por título" required>
                             <button type="submit">Buscar</button>
                         </form>
+
+                    <form action="crearCategoria.php" method="POST">
+                        <label for="tituloCategoria">Introduce tu categoria</label>
+                        <input type="text" name="tituloCategoria" id="tituloCategoria">
+                        <input type="submit" name="botonCrearEntrada" value="Crear Categoria">
+                    </form>
+
+                    <form action="verEntrada.php" method="POST">
+                        <label for="tituloCategoria">Introduce tu entrada</label>
+                        <input type="text" name="tituloEntrada" id="tituloEntrada">
+                        <input type="submit" name="botonVerEntrada" value="Crear Entrada">
+                    </form>
 
                     </div>
                 </div>
@@ -220,11 +232,7 @@ $entradas = conseguirUltimasEntradas($pdo);
                 </form>
             </div>
 
-            <form action="crearCategoria.php" method="POST">
-                        <label for="tituloCategoria">Introduce tu categoria</label>
-                        <input type="text" name="tituloCategoria" id="tituloCategoria">
-                        <input type="submit" name="botonCrearEntrada" value="Crear Categoria">
-                    </form>
+            
 
             <?php if (!isset($_SESSION['loginExito']) || !$_SESSION['loginExito']): ?>
                 <div class="login">
