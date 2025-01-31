@@ -71,7 +71,7 @@ try {
                     <?php foreach ($resultados as $resultado): ?>
                         <tr>
                             <td>
-                                <a href="mostrarEntrada.php?id=<?= $resultado['id'] ?>">
+                                <a href="verEntrada.php?id=<?= $resultado['id'] ?>">
                                     <?= htmlspecialchars($resultado['titulo']) ?>
                                 </a>
                             </td>

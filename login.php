@@ -2,7 +2,6 @@
 session_start();
 require_once 'requires/conexion.php';
 
-require_once 'requires/conexion.php';
 
 // Inicializamos las variables de sesión para control de intentos
 $_SESSION['errorInicioSesion'] = $_SESSION['errorInicioSesion'] ?? 0;

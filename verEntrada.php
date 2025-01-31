@@ -30,11 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['botonVerEntrada']) && 
         echo '<a href="index.php">Volver</a>';
     } else {
         echo "La entrada no existe.<br>";
-        header("refresh:1;url=index.php");
+        header("refresh:5;url=index.php");
         exit();
     }
 } else {
-    echo "Error en la solicitud POST<br>";
+    echo "Error en la solicitud POST";
     header("refresh:1;url=index.php");
     exit();
 }
