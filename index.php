@@ -66,13 +66,13 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
             <?php if (!$_SESSION['loginExito']) { ?>
                 <div class="login">
                     <h3>Identificate</h3>
-                        
+
                     <form method="POST" action="login.php">
                         <input type="email" name="emailLogin" placeholder="Email">
                         <input type="password" name="passwordLogin" placeholder="Contraseña">
-                        <?php if (isset($_SESSION['errorPassLogin'])){?>
-                        <span style="color: red;"><?php echo $_SESSION['errorPassLogin']; ?></span>
-                        <?php } ?> 
+                        <?php if (isset($_SESSION['errorPassLogin'])) { ?>
+                            <span style="color: red;"><?php echo $_SESSION['errorPassLogin']; ?></span>
+                        <?php } ?>
                         <button type="submit" name="botonLogin">Entrar</button>
                     </form>
                 </div>
@@ -80,7 +80,7 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                     <h3>Registrate</h3>
                     <?php if (isset($_SESSION['success_message']))
                         echo $_SESSION['success_message']; ?>
-                      <form method="POST" action="registro.php">
+                    <form method="POST" action="registro.php">
                         <input type="text" name="nombreRegistro" placeholder="Nombre">
                         <input type="text" name="apellidosRegistro" placeholder="Apellidos">
                         <input type="email" name="emailRegistro" placeholder="Email">
@@ -90,7 +90,7 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                 </div>
             <?php } else { ?>
                 <div>
-                    
+
                     <form action="crearEntrada.php" method="post">
                         <button type="submit" name="crearEntrada">Crear entrada</button>
                     </form>
@@ -107,17 +107,7 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                             <button type="submit">Buscar</button>
                         </form>
 
-                    <form action="crearCategoria.php" method="POST">
-                        <label for="tituloCategoria">Introduce tu categoria</label>
-                        <input type="text" name="tituloCategoria" id="tituloCategoria">
-                        <input type="submit" name="botonCrearEntrada" value="Crear Categoria">
-                    </form>
 
-                    <form action="verEntrada.php" method="POST">
-                        <label for="tituloCategoria">Introduce tu entrada</label>
-                        <input type="text" name="tituloEntrada" id="tituloEntrada">
-                        <input type="submit" name="botonVerEntrada" value="Crear Entrada">
-                    </form>
 
                     </div>
                 </div>
@@ -144,15 +134,17 @@ $entradas = conseguirUltimasEntradas($pdo);
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog de Videojuegos</title>
     <link rel="stylesheet" href="assets/css/estilo.css">
 </head>
+
 <body>
     <header>
-    <h1>Blog de Videojuegos</h1>
+        <h1>Blog de Videojuegos</h1>
         <nav>
             <ul>
                 <?php if (!empty($categorias)): ?>
@@ -167,7 +159,7 @@ $entradas = conseguirUltimasEntradas($pdo);
             </ul>
         </nav>
     </header>
-    
+
     <main>
         <section class="content">
             <h2>Últimas entradas</h2>
@@ -181,48 +173,48 @@ $entradas = conseguirUltimasEntradas($pdo);
             <?php else: ?>
                 <p>No hay entradas disponibles.</p>
             <?php endif; ?>
-            
+
 
             <h1>Listado de Entradas</h1>
-        <a href="index.php">Volver al inicio</a>
-        <section>
-        <?php if (!empty($entradas)): ?>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Título</th>
-                        <th>Descripción</th>
-                        <th>Categoría</th>
-                        <th>Fecha</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($entradas as $entrada): ?>
-                        <tr>
-                            <!-- Mostrar los datos de cada entrada -->
-                            <td><?= htmlspecialchars($entrada['titulo']) ?></td>
-                            <td><?= htmlspecialchars(substr($entrada['descripcion'], 0, 100)) ?>...</td>
-                            <td><?= htmlspecialchars($entrada['categoria']) ?></td>
-                            <td><?= htmlspecialchars($entrada['fecha']) ?></td>
+            <a href="index.php">Volver al inicio</a>
+            <section>
+                <?php if (!empty($entradas)): ?>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Descripción</th>
+                                <th>Categoría</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($entradas as $entrada): ?>
+                                <tr>
+                                    <!-- Mostrar los datos de cada entrada -->
+                                    <td><?= htmlspecialchars($entrada['titulo']) ?></td>
+                                    <td><?= htmlspecialchars(substr($entrada['descripcion'], 0, 100)) ?>...</td>
+                                    <td><?= htmlspecialchars($entrada['categoria']) ?></td>
+                                    <td><?= htmlspecialchars($entrada['fecha']) ?></td>
 
-                            <!-- Mostrar opciones de edición y eliminación solo si el usuario es el autor -->
-                            <?php if (isset($_SESSION['usuario']) && $_SESSION['usuario']['id'] == $entrada['usuario_id']): ?>
-                                <td>
-                                    <a href="editarEntrada.php?id=<?= $entrada['id'] ?>">Editar</a>
-                                    <a href="borrarEntrada.php?id=<?= $entrada['id'] ?>" onclick="return confirm('¿Quieres borrar esta entrada definitivamente?')">Borrar</a>
-                                </td>
-                            <?php endif; ?>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        <?php else: ?>
-            <p>No hay entradas disponibles.</p>
-        <?php endif; ?>
-        </section>
+                                    <!-- Mostrar opciones de edición y eliminación solo si el usuario es el autor -->
+                                    <?php if (isset($_SESSION['usuario']) && $_SESSION['usuario']['id'] == $entrada['usuario_id']): ?>
+                                        <td>
+                                            <a href="editarEntrada.php?id=<?= $entrada['id'] ?>">Editar</a>
+                                            <a href="borrarEntrada.php?id=<?= $entrada['id'] ?>" onclick="return confirm('¿Quieres borrar esta entrada definitivamente?')">Borrar</a>
+                                        </td>
+                                    <?php endif; ?>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php else: ?>
+                    <p>No hay entradas disponibles.</p>
+                <?php endif; ?>
+            </section>
             <button>Ver todas las entradas</button>
         </section>
-        
+
         <aside>
             <div class="search">
                 <h3>Buscar</h3>
@@ -232,7 +224,19 @@ $entradas = conseguirUltimasEntradas($pdo);
                 </form>
             </div>
 
-            
+            <form action="crearCategoria.php" method="POST">
+                <label for="tituloCategoria">Introduce tu categoria</label>
+                <input type="text" name="tituloCategoria" id="tituloCategoria">
+                <input type="submit" name="botonCrearEntrada" value="Crear Categoria">
+            </form>
+
+            <form action="verEntrada.php" method="POST">
+                <label for="tituloCategoria">Introduce tu entrada</label>
+                <input type="text" name="tituloEntrada" id="tituloEntrada">
+                <input type="submit" name="botonVerEntrada" value="Crear Entrada">
+            </form>
+
+
 
             <?php if (!isset($_SESSION['loginExito']) || !$_SESSION['loginExito']): ?>
                 <div class="login">
@@ -263,7 +267,7 @@ $entradas = conseguirUltimasEntradas($pdo);
                         <button type="submit" name="botonRegistro">Registrar</button>
                     </form>
 
-                   
+
 
                     <form action="crearEntrada.php" method="post">
                         <button type="submit" name="crearEntrada">Crear entrada</button>
@@ -279,17 +283,18 @@ $entradas = conseguirUltimasEntradas($pdo);
                             <label for="query">Buscar Entradas:</label>
                             <input type="text" id="query" name="query" placeholder="Buscar por título" required>
                             <button type="submit">Buscar</button>
-                    </form>
-                </div>
-            <?php else: ?>
-                <div class="logout">
-                    <form method="POST" action="logout.php">
-                        <button type="submit" name="botonCerrarSesion">Cerrar Sesión</button>
-                    </form>
-                </div>
-            <?php endif; ?>
+                        </form>
+                    </div>
+                <?php else: ?>
+                    <div class="logout">
+                        <form method="POST" action="logout.php">
+                            <button type="submit" name="botonCerrarSesion">Cerrar Sesión</button>
+                        </form>
+                    </div>
+                <?php endif; ?>
         </aside>
     </main>
 </body>
+
 </html>
 >>>>>>> a32720e8aae20cb429825fc6078dbe7124c15638
