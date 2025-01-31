@@ -151,7 +151,7 @@ $entradas = conseguirUltimasEntradas($pdo);
                     <li><a href="#">Sin categorías</a></li>
                 <?php endif; ?>
                 <li><a href="#">Responsabilidad</a></li>
-                <li><a href="contacto.php">Contacto</a></li>
+                <li><a href="./contacto.php">Contacto</a></li>
             </ul>
         </nav>
     </header>
