@@ -109,7 +109,7 @@ $_SESSION['loginExito'] = $_SESSION['loginExito'] ?? false;
                     <form action="verEntrada.php" method="POST">
                         <label for="tituloCategoria">Introduce tu entrada</label>
                         <input type="text" name="tituloEntrada" id="tituloEntrada">
-                        <input type="submit" name="botonVerEntrada" value="Crear Entrada">
+                        <input type="submit" name="botonVerEntrada" value="Ver Entrada">
                     </form>
                     <div class="search">
                         <form action="aniade_buscador.php" method="GET" style="display: inline;">
