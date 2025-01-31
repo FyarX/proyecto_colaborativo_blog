@@ -151,7 +151,7 @@ $entradas = conseguirUltimasEntradas($pdo);
                     <li><a href="#">Sin categorías</a></li>
                 <?php endif; ?>
                 <li><a href="#">Responsabilidad</a></li>
-                <li><a href="#">Contacto</a></li>
+                <li><a href="contacto.php">Contacto</a></li>
             </ul>
         </nav>
     </header>
@@ -220,6 +220,12 @@ $entradas = conseguirUltimasEntradas($pdo);
                 </form>
             </div>
 
+            <form action="crearCategoria.php" method="POST">
+                        <label for="tituloCategoria">Introduce tu categoria</label>
+                        <input type="text" name="tituloCategoria" id="tituloCategoria">
+                        <input type="submit" name="botonCrearEntrada" value="Crear Categoria">
+                    </form>
+
             <?php if (!isset($_SESSION['loginExito']) || !$_SESSION['loginExito']): ?>
                 <div class="login">
                     <h3>Identifícate</h3>
@@ -249,12 +255,8 @@ $entradas = conseguirUltimasEntradas($pdo);
                         <button type="submit" name="botonRegistro">Registrar</button>
                     </form>
 
-                    <form action="crearCategoria.php" method="POST">
-                        <label for="tituloCategoria">Introduce tu categoria</label>
-                        <input type="text" name="tituloCategoria" id="tituloCategoria">
-                        <input type="submit" name="botonCrearEntrada" value="Crear Categoria">
-                    </form>
-                    
+                   
+
                     <form action="crearEntrada.php" method="post">
                         <button type="submit" name="crearEntrada">Crear entrada</button>
                     </form>
