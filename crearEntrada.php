@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
 }
 
-// Obtener las categorías disponibles
+
 $categorias = conseguirCategorias($pdo);
 ?>
 
