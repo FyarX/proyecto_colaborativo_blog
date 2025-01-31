@@ -224,17 +224,7 @@ $entradas = conseguirUltimasEntradas($pdo);
                 </form>
             </div>
 
-            <form action="crearCategoria.php" method="POST">
-                <label for="tituloCategoria">Introduce tu categoria</label>
-                <input type="text" name="tituloCategoria" id="tituloCategoria">
-                <input type="submit" name="botonCrearEntrada" value="Crear Categoria">
-            </form>
 
-            <form action="verEntrada.php" method="POST">
-                <label for="tituloCategoria">Introduce tu entrada</label>
-                <input type="text" name="tituloEntrada" id="tituloEntrada">
-                <input type="submit" name="botonVerEntrada" value="Crear Entrada">
-            </form>
 
 
 
@@ -285,6 +275,20 @@ $entradas = conseguirUltimasEntradas($pdo);
                             <button type="submit">Buscar</button>
                         </form>
                     </div>
+
+                    <form action="crearCategoria.php" method="POST">
+                        <label for="tituloCategoria">Introduce tu categoria</label>
+                        <input type="text" name="tituloCategoria" id="tituloCategoria">
+                        <input type="submit" name="botonCrearEntrada" value="Crear Categoria">
+                    </form>
+
+                    <form action="verEntrada.php" method="POST">
+                        <label for="tituloCategoria">Introduce tu entrada</label>
+                        <input type="text" name="tituloEntrada" id="tituloEntrada">
+                        <input type="submit" name="botonVerEntrada" value="Crear Entrada">
+                    </form>
+
+
                 <?php else: ?>
                     <div class="logout">
                         <form method="POST" action="logout.php">
